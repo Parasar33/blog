@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery Admin Panel</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="login-container" id="loginForm">
+        <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Gallery</a>
+        <h2>Admin Login</h2>
+        <form onsubmit="return validateLogin(event)">
+            <input type="password" id="password" placeholder="Enter admin password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="admin-panel" id="adminPanel">
+        <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Gallery</a>
+        <h2>Add New Artwork</h2>
+        <form id="contentForm">
+            <select id="artworkType" required>
+                <option value="">Select Artwork Type</option>
+                <option value="digital">Digital Art</option>
+                <option value="painting">Painting</option>
+                <option value="sketch">Sketch</option>
+            </select>
+            
+            <input type="text" id="title" placeholder="Artwork Title" required>
+            
+            <div id="artworkSection">
+                <input type="file" id="artworkFile" accept="image/*" required>
+                <textarea id="artworkDescription" placeholder="Description" rows="4" required></textarea>
+                
+                <!-- Optional fields -->
+                <input type="text" id="medium" placeholder="Medium used (e.g., Acrylic, Oil, Digital)">
+                <input type="text" id="dimensions" placeholder="Dimensions (optional)">
+                <input type="date" id="creationDate" required>
+            </div>
+
+            <input type="text" id="tags" placeholder="Tags (comma separated)" required>
+            
+            <div class="preview-section">
+                <h3>Preview</h3>
+                <img id="imagePreview" src="" alt="Image preview" style="display: none; max-width: 300px;">
+            </div>
+
+            <button type="submit">Upload Artwork</button>
+        </form>
+
+        <div class="manage-section">
+            <h2>Manage Artwork</h2>
+            <div id="existingArtwork">
+                <!-- Existing artwork will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageBox" class="message-box">
+        <span class="message-text"></span>
+        <span class="close-message">&times;</span>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

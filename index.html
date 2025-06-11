@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishav's Art Gallery</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>Rishav's Art Gallery</h1>
+            <p>Digital Art • Paintings • Sketches</p>
+        </div>
+        <nav>
+            <a href="#" class="active" data-filter="all">All</a>
+            <a href="#" data-filter="digital">Digital Art</a>
+            <a href="#" data-filter="painting">Paintings</a>
+            <a href="#" data-filter="sketch">Sketches</a>
+        </nav>
+    </header>
+
+    <!-- Search Section -->
+    <div class="search-section">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search artwork...">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="tags-container">
+            <!-- Tags will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Artworks will be dynamically added here -->
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading artwork...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Artwork Modal -->
+    <div class="modal" id="postModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <!-- Artwork content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/parasar33" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/rishav-parasar/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="admin.html" class="admin-link"><i class="fas fa-user-shield"></i> Admin</a>
+            </div>
+            <p>&copy; 2024 Rishav Parasar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="blog.js"></script>
+</body>
+</html>
