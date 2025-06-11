@@ -19,4 +19,5 @@ jobs:
       - name: Run JavaScript file
         run: |
           npm install dotenv
-          node script.js
+          node blog.js
+          node admin.js
