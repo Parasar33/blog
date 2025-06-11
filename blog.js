@@ -1,7 +1,6 @@
 // Configuration
 const GITHUB_USERNAME = 'Parasar33';
 const REPO_NAME = 'blog';
-const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
 
 // State management
 let allArtworks = [];
@@ -36,31 +35,21 @@ function showError(message) {
 }
 
 // Fetch content from GitHub
+// Fetch content from GitHub (direct raw fetch)
 async function fetchContent() {
     try {
         setLoading(true);
-        const response = await fetch(
-            `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/content/metadata.json`,
-            {
-                headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
-                    'Accept': 'application/vnd.github.v3.raw'
-                }
-            }
-        );
+
+        const rawMetadataUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/content/metadata.json`;
+
+        const response = await fetch(rawMetadataUrl);
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch content (${response.status})`);
+            throw new Error(`Failed to fetch metadata.json (${response.status})`);
         }
 
-        const data = await response.json();
-        
-        if (!data.content) {
-            throw new Error('No content found in metadata.json');
-        }
+        allArtworks = await response.json();
 
-        allArtworks = JSON.parse(atob(data.content));
-        
         if (!Array.isArray(allArtworks)) {
             allArtworks = [];
         }
@@ -68,7 +57,7 @@ async function fetchContent() {
         // Sort by creation date
         allArtworks.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
         filteredArtworks = [...allArtworks];
-        
+
         await displayArtworks();
         setupTags();
     } catch (error) {
@@ -78,6 +67,7 @@ async function fetchContent() {
         setLoading(false);
     }
 }
+
 
 // Display artworks in grid
 async function displayArtworks() {
