@@ -1,7 +1,7 @@
 // Configuration
 const GITHUB_USERNAME = 'Parasar33';
 const REPO_NAME = 'blog';
-const GITHUB_TOKEN = 'PASTE HERE';
+const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
 
 // State management
 let allArtworks = [];
