@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": 1749633301365,
+    "title": "Diva Walk",
+    "type": "painting",
+    "medium": "Pencil",
+    "dimensions": "",
+    "creationDate": "2025-03-16",
+    "description": "Diva Walk - Tribal Tattoo Art",
+    "tags": [
+      "Pencil",
+      "Tribal"
+    ],
+    "imagePath": "images/1749633301365-diva-walk.jpg",
+    "timestamp": "2025-06-11T09:15:03.379Z"
+  }
+]
