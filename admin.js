@@ -1,5 +1,5 @@
 // GitHub configuration
-const GITHUB_TOKEN = 'PASTE HERE';
+const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
 const GITHUB_USERNAME = 'Parasar33';
 const REPO_NAME = 'blog';
 const BRANCH = 'main';
@@ -18,17 +18,29 @@ async function validateLogin(event) {
     event.preventDefault();
     const password = document.getElementById('password').value;
     const hashedPassword = await sha256(password);
-    
+
     // Replace this with your actual hashed password
-    const correctHash = "d2fb5ab1e777e77584a410b16fc065c2efb3ee4b16f2bbc83700f51e6a59f441";
-    
-    if(hashedPassword === correctHash) {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('adminPanel').style.display = 'block';
-        loadExistingArtwork();
-    } else {
-        showMessage('Invalid password', 'error');
-    }
+    const correctHashes = [
+  "d2fb5ab1e777e77584a410b16fc065c2efb3ee4b16f2bbc83700f51e6a59f441",
+  "120f6e5b4ea32f65bda68452fcfaaef06b0136e1d0e4a6f60bc3771fa0936dd6"
+];
+
+const wrongHashes = [
+  "d554b517829a040cb3e3c4f993b7b6deadef6ce60d495554e38aeb70ffaeba86",
+  "d2dbfb841b242f49bb7cabea98ea5a93d6808c5e28b52a601600fa2f66affb1e",
+  "86c963bb0a9ac56ef0686c2d70976792393c8bbfbb948a3ee316d5ba7f9a92b5",
+  "bd71d54f58134445b39195c8e06eeb26a443a4238b2b6be1a17829c9e878afa3"
+];
+
+if (correctHashes.includes(hashedPassword)) {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  loadExistingArtwork();
+} else if (wrongHashes.includes(hashedPassword)) {
+  showMessage('You are not that smart Buddy!!', 'error');
+} else {
+  showMessage('Invalid password', 'error');
+}
 }
 
 // Show message function
@@ -37,7 +49,7 @@ function showMessage(message, type) {
     messageBox.className = `message-box ${type}`;
     messageBox.querySelector('.message-text').textContent = message;
     messageBox.style.display = 'block';
-    
+
     setTimeout(() => {
         messageBox.style.display = 'none';
     }, 3000);
@@ -48,7 +60,7 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 // File preview handler
-document.getElementById('artworkFile').addEventListener('change', function(event) {
+document.getElementById('artworkFile').addEventListener('change', function (event) {
     const file = event.target.files[0];
     if (file) {
         if (!ALLOWED_FILE_TYPES.includes(file.type)) {
@@ -62,7 +74,7 @@ document.getElementById('artworkFile').addEventListener('change', function(event
             return;
         }
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             const preview = document.getElementById('imagePreview');
             preview.src = e.target.result;
             preview.style.display = 'block';
@@ -119,7 +131,7 @@ async function uploadToGitHub(content, metadata) {
 async function uploadFile(path, content, isBase64 = false) {
     try {
         const encodedContent = isBase64 ? content : btoa(unescape(encodeURIComponent(content)));
-        
+
         // Check if file exists
         let sha;
         try {
@@ -183,14 +195,19 @@ async function updateMetadataIndex(newArtwork) {
             currentMetadata = JSON.parse(atob(data.content));
         }
 
+        console.log('Current Metadata:', currentMetadata);
+
         // Add new artwork
         currentMetadata.push(newArtwork);
 
         // Sort by creation date
         currentMetadata.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
 
+        console.log('Updated Metadata:', currentMetadata);
+
         // Upload updated metadata.json
-        await uploadFile(indexPath, JSON.stringify(currentMetadata, null, 2));
+        const uploadResponse = await uploadFile(indexPath, JSON.stringify(currentMetadata, null, 2));
+        console.log('Upload Response:', uploadResponse);
     } catch (error) {
         console.error('Error updating metadata:', error);
         throw error;
@@ -222,13 +239,13 @@ async function loadExistingArtwork() {
                 'Authorization': `token ${GITHUB_TOKEN}`
             }
         });
-        
+
         if (response.ok) {
             const data = await response.json();
             const metadata = JSON.parse(atob(data.content));
             displayExistingArtwork(metadata);
         }
-    } catch(error) {
+    } catch (error) {
         console.error('Error loading existing artwork:', error);
         showMessage('Error loading existing artwork', 'error');
     }
@@ -254,9 +271,9 @@ function displayExistingArtwork(metadata) {
 }
 
 // Form submission handler
-document.getElementById('contentForm').addEventListener('submit', async function(event) {
+document.getElementById('contentForm').addEventListener('submit', async function (event) {
     event.preventDefault();
-    
+
     const submitButton = this.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
@@ -340,7 +357,7 @@ async function deleteArtwork(artworkId) {
 
         showMessage('Artwork deleted successfully', 'success');
         loadExistingArtwork();
-    } catch(error) {
+    } catch (error) {
         console.error('Error deleting artwork:', error);
         showMessage('Error deleting artwork', 'error');
     }
@@ -360,7 +377,7 @@ async function deleteFile(path) {
         }
 
         const data = await response.json();
-        
+
         // Delete file
         const deleteResponse = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${path}`, {
             method: 'DELETE',
@@ -399,7 +416,7 @@ async function updateMetadataIndexAfterDelete(filename) {
 
         const data = await response.json();
         let metadata = JSON.parse(atob(data.content));
-        
+
         // Remove deleted artwork
         metadata = metadata.filter(item => item.filename !== filename);
 
