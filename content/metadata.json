@@ -1,5 +1,20 @@
 [
   {
+    "id": 1750151072296,
+    "title": "Her",
+    "type": "painting",
+    "medium": "Pencil",
+    "dimensions": "",
+    "creationDate": "2025-06-15",
+    "description": "Her - the face I see when I close my eyes!",
+    "tags": [
+      "Pencil",
+      "Tribal"
+    ],
+    "imagePath": "images/1750151072296-her.jpeg",
+    "timestamp": "2025-06-17T09:04:34.590Z"
+  },
+  {
     "id": 1749711161769,
     "title": "After all, I am the Giver",
     "type": "poem",
