@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #1f1c2c;
     --secondary-color: #3a3a52;
@@ -184,7 +183,9 @@ nav a.active {
 
 /* Modal */
 .modal {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -195,18 +196,31 @@ nav a.active {
     backdrop-filter: blur(8px);
 }
 
+
 .modal-content {
     position: relative;
     background: var(--card-background);
     backdrop-filter: var(--glass-blur);
-    margin: 5% auto;
-    padding: 2rem;
-    width: 90%;
-    max-width: 800px;
+    padding: 1rem;
+    width: 60%; /* Smaller width */
+    max-width: 500px; /* Maximum width */
     border-radius: var(--border-radius);
-    max-height: 90vh;
-    overflow-y: auto;
+    max-height: 80vh; /* Maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
     box-shadow: var(--shadow);
+}
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Ensures the image fits within the modal without zooming */
+    border-radius: var(--border-radius);
 }
 
 .close-modal {
