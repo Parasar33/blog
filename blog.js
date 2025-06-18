@@ -115,6 +115,38 @@ async function displayArtworks() {
     }
 }
 
+// function openModal(artwork) {
+//     const modal = document.getElementById('postModal');
+//     const modalBody = modal.querySelector('.modal-body');
+    
+//     const imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/${artwork.imagePath}`;
+
+//     modalBody.innerHTML = `
+//         <img src="${imageUrl}" 
+//             alt="${artwork.title}" 
+//             class="modal-image"
+//             onerror="this.src='images/placeholder.jpg'">
+//         <h2>${artwork.title}</h2>
+//         <div class="artwork-metadata">
+//             <p><i class="fas fa-calendar"></i> Created on ${formatDate(artwork.creationDate)}</p>
+//             <p><i class="fas fa-palette"></i> ${artwork.type}</p>
+//             ${artwork.medium ? `<p><i class="fas fa-paint-brush"></i> Medium: ${artwork.medium}</p>` : ''}
+//             ${artwork.dimensions ? `<p><i class="fas fa-ruler-combined"></i> Dimensions: ${artwork.dimensions}</p>` : ''}
+//         </div>
+//         <div class="artwork-description">
+//             <p>${artwork.description}</p>
+//         </div>
+//         <div class="artwork-tags">
+//             ${artwork.tags.map(tag => `
+//                 <span class="tag" onclick="filterByTag('${tag}'); modal.style.display='none'">
+//                     ${tag}
+//                 </span>`).join('')}
+//         </div>
+//     `;
+
+//     modal.style.display = 'block';
+// }
+
 function openModal(artwork) {
     const modal = document.getElementById('postModal');
     const modalBody = modal.querySelector('.modal-body');
@@ -126,26 +158,11 @@ function openModal(artwork) {
             alt="${artwork.title}" 
             class="modal-image"
             onerror="this.src='images/placeholder.jpg'">
-        <h2>${artwork.title}</h2>
-        <div class="artwork-metadata">
-            <p><i class="fas fa-calendar"></i> Created on ${formatDate(artwork.creationDate)}</p>
-            <p><i class="fas fa-palette"></i> ${artwork.type}</p>
-            ${artwork.medium ? `<p><i class="fas fa-paint-brush"></i> Medium: ${artwork.medium}</p>` : ''}
-            ${artwork.dimensions ? `<p><i class="fas fa-ruler-combined"></i> Dimensions: ${artwork.dimensions}</p>` : ''}
-        </div>
-        <div class="artwork-description">
-            <p>${artwork.description}</p>
-        </div>
-        <div class="artwork-tags">
-            ${artwork.tags.map(tag => `
-                <span class="tag" onclick="filterByTag('${tag}'); modal.style.display='none'">
-                    ${tag}
-                </span>`).join('')}
-        </div>
     `;
 
-    modal.style.display = 'block';
+    modal.style.display = 'block'; // Ensure this line is present
 }
+
 
 // Filter functions
 function filterArtworks() {
@@ -205,6 +222,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('postModal');
         if (e.target === modal) {
             modal.style.display = 'none';
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.getElementById('postModal').style.display = 'none';
         }
     });
 
