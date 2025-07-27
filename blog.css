@@ -181,9 +181,8 @@ nav a.active {
     color: #ddd;
 }
 
-/* Modal */
 .modal {
-    display: flex;
+    display: none; /* Change from 'flex' to 'none' */
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -196,6 +195,10 @@ nav a.active {
     backdrop-filter: blur(8px);
 }
 
+/* Add this class for when the modal should be shown */
+.modal.show {
+    display: flex;
+}
 
 .modal-content {
     position: relative;
@@ -315,4 +318,56 @@ footer {
     .modal-content {
         width: 95%;
     }
+}
+
+.auth-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 26, 0.98);
+    z-index: 2000;
+    backdrop-filter: var(--glass-blur);
+}
+
+.auth-content {
+    background: var(--card-background);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.auth-content input {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--accent-color);
+    background: transparent;
+    color: var(--text-color);
+}
+
+.auth-content button {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-welcome {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+    color: var(--accent-color);
+    font-size: 1.5rem;
 }

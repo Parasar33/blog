@@ -1,3 +1,13 @@
+async function getHash(password) {
+    const hash = await hashPassword(password);
+    console.log(`${hash}`);
+}
+
+// Run this in console to get your hashes
+getHash("Pishu");
+getHash("pishu");
+getHash("Pishu@2004");
+getHash("Pishu@1234");
 // Configuration
 const GITHUB_USERNAME = 'Parasar33';
 const REPO_NAME = 'blog';
@@ -15,7 +25,7 @@ function setLoading(loading) {
     const contentGrid = document.querySelector('.content-grid');
     if (loading) {
         contentGrid.innerHTML = `
-            <div class="loading-state">
+            <div class="loading-state" style="opacity: 0.7; text-align: center; padding: 20px;">
                 <i class="fas fa-spinner fa-spin"></i>
                 <p>Loading artworks...</p>
             </div>
@@ -41,8 +51,11 @@ async function fetchContent() {
         setLoading(true);
 
         const rawMetadataUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/content/metadata.json`;
-
-        const response = await fetch(rawMetadataUrl);
+        
+        const response = await fetch(rawMetadataUrl, {
+            method: 'GET',
+            cache: 'no-cache'
+        });
 
         if (!response.ok) {
             throw new Error(`Failed to fetch metadata.json (${response.status})`);
@@ -62,7 +75,8 @@ async function fetchContent() {
         setupTags();
     } catch (error) {
         console.error('Error fetching content:', error);
-        showError(`Failed to load artworks: ${error.message}`);
+        showError('Loading artworks...');
+        setTimeout(fetchContent, 2000);
     } finally {
         setLoading(false);
     }
@@ -257,4 +271,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load
     fetchContent();
+});
+
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordModal = document.getElementById('passwordModal');
+    const welcomeModal = document.getElementById('welcomeModal');
+    
+    // Show password modal immediately
+    passwordModal.style.display = 'block';
+    
+    // SHA-256 hashes of the passwords
+    const specialUserHashes = [
+        "348a103e65ffa9c108abe0474e17c63415d38fca2dbbae77240ef4afa2408a9c",
+        "71c4516342e68652fd65448457ed8dd676a1fe74276331246f184e27944d5326",
+        "d554b517829a040cb3e3c4f993b7b6deadef6ce60d495554e38aeb70ffaeba86",
+        "d2dbfb841b242f49bb7cabea98ea5a93d6808c5e28b52a601600fa2f66affb1e"
+    ];
+
+    // Handle password submission
+    document.getElementById('submitPassword').addEventListener('click', async function() {
+        const password = document.getElementById('passwordInput').value;
+        const hashedPassword = await hashPassword(password);
+        
+        // Default message
+        welcomeModal.querySelector('h2').textContent = "1st Rule of Fight Club";
+        welcomeModal.querySelector('p').textContent = "We don't talk about fight club!";
+        
+        // Override with special message if it's a special user
+        if (specialUserHashes.includes(hashedPassword)) {
+            welcomeModal.querySelector('h2').textContent = "Oh shit, its u";
+            welcomeModal.querySelector('p').textContent = "welcome anyway buddy!";
+        }
+        
+        passwordModal.style.display = 'none';
+        welcomeModal.style.display = 'block';
+    });
+    
+    // Handle welcome modal closing
+    document.querySelector('.close-welcome').addEventListener('click', function() {
+        welcomeModal.style.display = 'none';
+    });
+    
+    // Allow escape key for welcome modal only
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && welcomeModal.style.display === 'block') {
+            welcomeModal.style.display = 'none';
+        }
+    });
+    
+    // Allow clicking outside for welcome modal only
+    window.addEventListener('click', function(e) {
+        if (e.target === welcomeModal) {
+            welcomeModal.style.display = 'none';
+        }
+    });
+
+    // Handle Enter key in password input
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('submitPassword').click();
+        }
+    });
 });
