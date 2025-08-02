@@ -1,13 +1,3 @@
-async function getHash(password) {
-    const hash = await hashPassword(password);
-    console.log(`${hash}`);
-}
-
-// Run this in console to get your hashes
-getHash("Pishu");
-getHash("pishu");
-getHash("Pishu@2004");
-getHash("Pishu@1234");
 // Configuration
 const GITHUB_USERNAME = 'Parasar33';
 const REPO_NAME = 'blog';
@@ -45,11 +35,9 @@ function showError(message) {
 }
 
 // Fetch content from GitHub
-// Fetch content from GitHub (direct raw fetch)
 async function fetchContent() {
     try {
         setLoading(true);
-
         const rawMetadataUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/content/metadata.json`;
         
         const response = await fetch(rawMetadataUrl, {
@@ -67,7 +55,6 @@ async function fetchContent() {
             allArtworks = [];
         }
 
-        // Sort by creation date
         allArtworks.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
         filteredArtworks = [...allArtworks];
 
@@ -81,7 +68,6 @@ async function fetchContent() {
         setLoading(false);
     }
 }
-
 
 // Display artworks in grid
 async function displayArtworks() {
@@ -129,38 +115,6 @@ async function displayArtworks() {
     }
 }
 
-// function openModal(artwork) {
-//     const modal = document.getElementById('postModal');
-//     const modalBody = modal.querySelector('.modal-body');
-    
-//     const imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/${artwork.imagePath}`;
-
-//     modalBody.innerHTML = `
-//         <img src="${imageUrl}" 
-//             alt="${artwork.title}" 
-//             class="modal-image"
-//             onerror="this.src='images/placeholder.jpg'">
-//         <h2>${artwork.title}</h2>
-//         <div class="artwork-metadata">
-//             <p><i class="fas fa-calendar"></i> Created on ${formatDate(artwork.creationDate)}</p>
-//             <p><i class="fas fa-palette"></i> ${artwork.type}</p>
-//             ${artwork.medium ? `<p><i class="fas fa-paint-brush"></i> Medium: ${artwork.medium}</p>` : ''}
-//             ${artwork.dimensions ? `<p><i class="fas fa-ruler-combined"></i> Dimensions: ${artwork.dimensions}</p>` : ''}
-//         </div>
-//         <div class="artwork-description">
-//             <p>${artwork.description}</p>
-//         </div>
-//         <div class="artwork-tags">
-//             ${artwork.tags.map(tag => `
-//                 <span class="tag" onclick="filterByTag('${tag}'); modal.style.display='none'">
-//                     ${tag}
-//                 </span>`).join('')}
-//         </div>
-//     `;
-
-//     modal.style.display = 'block';
-// }
-
 function openModal(artwork) {
     const modal = document.getElementById('postModal');
     const modalBody = modal.querySelector('.modal-body');
@@ -174,9 +128,8 @@ function openModal(artwork) {
             onerror="this.src='images/placeholder.jpg'">
     `;
 
-    modal.style.display = 'block'; // Ensure this line is present
+    modal.style.display = 'block';
 }
-
 
 // Filter functions
 function filterArtworks() {
@@ -204,16 +157,33 @@ function setupTags() {
         artwork.tags.forEach(tag => allTags.add(tag));
     });
 
-    tagsContainer.innerHTML = Array.from(allTags)
-        .sort()
-        .map(tag => `<span class="tag" onclick="filterByTag('${tag}')">${tag}</span>`)
-        .join('');
+    // Start with the "All" tag
+    tagsContainer.innerHTML = `<span class="tag active" onclick="filterByTag('all')">All</span>` +
+        Array.from(allTags)
+            .sort()
+            .map(tag => `<span class="tag" onclick="filterByTag('${tag}')">${tag}</span>`)
+            .join('');
 }
 
+// Modify the filterByTag function to handle the "All" tag
 function filterByTag(tag) {
     const searchInput = document.getElementById('searchInput');
-    searchInput.value = tag;
-    currentSearch = tag.toLowerCase();
+    const tags = document.querySelectorAll('.tags-container .tag');
+    
+    // Remove active class from all tags
+    tags.forEach(t => t.classList.remove('active'));
+    
+    // Add active class to clicked tag
+    event.target.classList.add('active');
+
+    if (tag.toLowerCase() === 'all') {
+        searchInput.value = '';
+        currentSearch = '';
+    } else {
+        searchInput.value = tag;
+        currentSearch = tag.toLowerCase();
+    }
+    
     filterArtworks();
 }
 
@@ -227,6 +197,30 @@ function formatDate(dateString) {
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+    const welcomeModal = document.getElementById('welcomeModal');
+    
+    // Show welcome modal immediately
+    welcomeModal.style.display = 'block';
+    
+    // Handle welcome modal closing
+    document.querySelector('.close-welcome').addEventListener('click', function() {
+        welcomeModal.style.display = 'none';
+    });
+    
+    // Allow escape key for welcome modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && welcomeModal.style.display === 'block') {
+            welcomeModal.style.display = 'none';
+        }
+    });
+    
+    // Allow clicking outside for welcome modal
+    window.addEventListener('click', function(e) {
+        if (e.target === welcomeModal) {
+            welcomeModal.style.display = 'none';
+        }
+    });
+
     // Modal close handlers
     document.querySelector('.close-modal').addEventListener('click', () => {
         document.getElementById('postModal').style.display = 'none';
@@ -236,13 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('postModal');
         if (e.target === modal) {
             modal.style.display = 'none';
-        }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            document.getElementById('postModal').style.display = 'none';
         }
     });
 
@@ -271,74 +258,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load
     fetchContent();
-});
-
-async function hashPassword(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const passwordModal = document.getElementById('passwordModal');
-    const welcomeModal = document.getElementById('welcomeModal');
-    
-    // Show password modal immediately
-    passwordModal.style.display = 'block';
-    
-    // SHA-256 hashes of the passwords
-    const specialUserHashes = [
-        "348a103e65ffa9c108abe0474e17c63415d38fca2dbbae77240ef4afa2408a9c",
-        "71c4516342e68652fd65448457ed8dd676a1fe74276331246f184e27944d5326",
-        "d554b517829a040cb3e3c4f993b7b6deadef6ce60d495554e38aeb70ffaeba86",
-        "d2dbfb841b242f49bb7cabea98ea5a93d6808c5e28b52a601600fa2f66affb1e"
-    ];
-
-    // Handle password submission
-    document.getElementById('submitPassword').addEventListener('click', async function() {
-        const password = document.getElementById('passwordInput').value;
-        const hashedPassword = await hashPassword(password);
-        
-        // Default message
-        welcomeModal.querySelector('h2').textContent = "1st Rule of Fight Club";
-        welcomeModal.querySelector('p').textContent = "We don't talk about fight club!";
-        
-        // Override with special message if it's a special user
-        if (specialUserHashes.includes(hashedPassword)) {
-            welcomeModal.querySelector('h2').textContent = "Oh shit, its u";
-            welcomeModal.querySelector('p').textContent = "welcome anyway buddy!";
-        }
-        
-        passwordModal.style.display = 'none';
-        welcomeModal.style.display = 'block';
-    });
-    
-    // Handle welcome modal closing
-    document.querySelector('.close-welcome').addEventListener('click', function() {
-        welcomeModal.style.display = 'none';
-    });
-    
-    // Allow escape key for welcome modal only
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && welcomeModal.style.display === 'block') {
-            welcomeModal.style.display = 'none';
-        }
-    });
-    
-    // Allow clicking outside for welcome modal only
-    window.addEventListener('click', function(e) {
-        if (e.target === welcomeModal) {
-            welcomeModal.style.display = 'none';
-        }
-    });
-
-    // Handle Enter key in password input
-    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            document.getElementById('submitPassword').click();
-        }
-    });
 });
