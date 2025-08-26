@@ -1,5 +1,20 @@
 [
   {
+    "id": 1756223133460,
+    "title": "Gopi",
+    "type": "painting",
+    "medium": "Pencil",
+    "dimensions": "",
+    "creationDate": "2025-08-23",
+    "description": "First full sketch without cheating....",
+    "tags": [
+      "Sketch",
+      "Pencil"
+    ],
+    "imagePath": "images/1756223133460-gopi.jpg",
+    "timestamp": "2025-08-26T15:45:36.021Z"
+  },
+  {
     "id": 1755711937123,
     "title": "I Heard You ( Don't Talk to Yourself )",
     "type": "poem",
