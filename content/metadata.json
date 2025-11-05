@@ -93,7 +93,8 @@
     "creationDate": "2025-08-20",
     "description": "Talk - RHS",
     "tags": [
-      "English"
+      "English",
+      "Series"
     ],
     "imagePath": "images/1755711937123-i-heard-you-don-t-talk-to-yourself-.jpg",
     "timestamp": "2025-08-20T17:45:39.659Z"
@@ -121,7 +122,8 @@
     "creationDate": "2025-08-06",
     "description": "Talk - LHS",
     "tags": [
-      "English"
+      "English",
+      "Series"
     ],
     "imagePath": "images/1754502037190-don-t-talk-to-yourself.jpg",
     "timestamp": "2025-08-06T17:40:38.697Z"
@@ -191,7 +193,8 @@
     "creationDate": "2025-06-25",
     "description": "Baarish/Rain - RHS",
     "tags": [
-      "Hindi"
+      "Hindi",
+      "Series"
     ],
     "imagePath": "images/1753635663232-baarish-ki-baatein-2.jpg",
     "timestamp": "2025-07-27T17:01:04.966Z"
@@ -248,7 +251,8 @@
     "creationDate": "2025-05-25",
     "description": "Baarish/Rain - LHS",
     "tags": [
-      "Hindi"
+      "Hindi",
+      "Series"
     ],
     "imagePath": "images/1750402948165-baarish-ki-baatein.jpeg",
     "timestamp": "2025-06-20T07:02:30.278Z"
