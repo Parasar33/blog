@@ -29,6 +29,7 @@ header {
     text-align: center;
     clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
     box-shadow: var(--shadow);
+    position: relative;
 }
 
 .header-content h1 {
@@ -64,6 +65,54 @@ nav a.active {
     background: var(--accent-color);
     color: #fff;
     box-shadow: 0 4px 10px rgba(245, 87, 108, 0.3);
+}
+.comment-btn {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.comment-btn:hover {
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+    transform: translateY(-50%) translateY(-2px);
+}
+
+#commentForm input,
+#commentForm textarea {
+    width: 92.5%;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: var(--card-background);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+}
+
+#commentForm textarea {
+    resize: none;
+}
+
+#commentForm button {
+    width: 100%;
+    background: var(--accent-color);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* Search Section */
@@ -299,6 +348,7 @@ footer {
     border-radius: var(--border-radius);
     grid-column: 1 / -1;
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {

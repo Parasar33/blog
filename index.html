@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parasar's Gallery</title>
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="blog.css">
 </head>
 
 <body>
+
     <!-- Welcome Modal -->
     <div id="welcomeModal" class="auth-modal">
         <div class="auth-content">
@@ -28,11 +32,12 @@
     <header>
         <div class="header-content">
             <h1>Rishav's Gallery</h1>
-            <p>Digital Art • Paintings • Sketches • Poems</p>
+            <p>Paintings • Sketches • Poems</p>
         </div>
+
+        <!-- CENTERED NAV -->
         <nav>
             <a href="#" class="active" data-filter="all">All</a>
-            <a href="#" data-filter="digital">Digital Art</a>
             <a href="#" data-filter="painting">Paintings</a>
             <a href="#" data-filter="sketch">Sketches</a>
             <a href="#" data-filter="poem">Poems</a>
@@ -46,7 +51,7 @@
             <i class="fas fa-search"></i>
         </div>
         <div class="tags-container">
-            <!-- Tags will be dynamically added here -->
+            <!-- Tags injected by JS -->
         </div>
     </div>
 
@@ -64,9 +69,31 @@
     <div class="modal" id="postModal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-body">
-                <!-- Artwork content will be inserted here -->
-            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Comment Modal -->
+    <div class="modal" id="commentModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="text-align:center; margin-bottom:1rem;">Leave an Anonymous Comment</h2>
+
+            <form id="commentForm">
+                <input type="hidden" name="Title" id="Title" value="">
+
+                <input type="text" name="Name" placeholder="Anonymous name" required>
+                <textarea name="Message" placeholder="Your comment..." rows="4" required></textarea>
+
+                <!-- Hidden field for artwork title -->
+                <input type="hidden" name="Tag" id="commentTag" value="">
+
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i> Send
+                </button>
+
+                <p id="msg" style="margin-top:1rem; text-align:center;"></p>
+            </form>
         </div>
     </div>
 
@@ -83,7 +110,9 @@
         </div>
     </footer>
 
+    <!-- JS -->
     <script src="blog.js"></script>
+
 </body>
 
 </html>
