@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Rishav's Gallery</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container" id="loginForm">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Gallery</span>
+        </a>
+        
+        <div class="login-card">
+            <div class="login-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2>Admin Access</h2>
+            <p class="login-subtitle">Enter your credentials to continue</p>
+            
+            <form onsubmit="return validateLogin(event)">
+                <div class="input-group">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="password" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="login-btn">
+                    <span>Authenticate</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <!-- Admin Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Gallery</span>
+                </a>
+            </div>
+            <div class="header-center">
+                <div class="admin-logo">
+                    <i class="fas fa-brush"></i>
+                </div>
+                <div class="admin-title">
+                    <h1>Admin Panel</h1>
+                    <p>Manage your artwork collection</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="status-badge">
+                    <i class="fas fa-circle"></i>
+                    Connected
+                </span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div>
+                        <h2>Add New Artwork</h2>
+                        <p>Upload a new piece to your gallery</p>
+                    </div>
+                </div>
+
+                <form id="contentForm" class="upload-form">
+                    <div class="form-grid">
+                        <!-- Left Column -->
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="artworkType">
+                                    <i class="fas fa-palette"></i>
+                                    Content Type
+                                </label>
+                                <div class="select-wrapper">
+                                    <select id="artworkType" required>
+                                        <option value="">Select type...</option>
+                                        <option value="painting">Painting</option>
+                                        <option value="sketch">Sketch</option>
+                                        <option value="poem">Poem</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">
+                                    <i class="fas fa-heading"></i>
+                                    Artwork Title
+                                </label>
+                                <input type="text" id="title" placeholder="Enter title..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="artworkDescription">
+                                    <i class="fas fa-align-left"></i>
+                                    Description
+                                </label>
+                                <textarea id="artworkDescription" placeholder="Describe your artwork..." rows="4" required></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="medium">
+                                        <i class="fas fa-paint-brush"></i>
+                                        Medium
+                                    </label>
+                                    <input type="text" id="medium" placeholder="e.g., Acrylic, Oil">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dimensions">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        Dimensions
+                                    </label>
+                                    <input type="text" id="dimensions" placeholder="e.g., 24x36 inches">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="creationDate">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        Creation Date
+                                    </label>
+                                    <input type="date" id="creationDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tags">
+                                        <i class="fas fa-tags"></i>
+                                        Tags
+                                    </label>
+                                    <input type="text" id="tags" placeholder="nature, abstract..." required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Upload -->
+                        <div class="form-column">
+                            <div class="upload-area">
+                                <label for="artworkFile" class="upload-dropzone">
+                                    <input type="file" id="artworkFile" accept="image/*" required>
+                                    <div class="dropzone-content">
+                                        <div class="dropzone-icon">
+                                            <i class="fas fa-image"></i>
+                                        </div>
+                                        <h3>Drop your image here</h3>
+                                        <p>or click to browse</p>
+                                        <span class="file-types">JPG, PNG, GIF, WebP (Max 5MB)</span>
+                                    </div>
+                                    <div class="preview-container">
+                                        <img id="imagePreview" src="" alt="Preview">
+                                        <div class="preview-overlay">
+                                            <i class="fas fa-exchange-alt"></i>
+                                            <span>Change Image</span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn-secondary">
+                            <i class="fas fa-redo"></i>
+                            <span>Reset Form</span>
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Upload Artwork</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Manage Section -->
+            <section class="manage-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div>
+                        <h2>Manage Collection</h2>
+                        <p>View and manage your existing artworks</p>
+                    </div>
+                </div>
+
+                <div id="existingArtwork" class="artwork-grid">
+                    <!-- Existing artwork will be loaded here -->
+                    <div class="loading-placeholder">
+                        <div class="loader">
+                            <div class="loader-inner"></div>
+                        </div>
+                        <p>Loading artworks...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageBox" class="message-box">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <span class="message-text"></span>
+        <button class="close-message">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
