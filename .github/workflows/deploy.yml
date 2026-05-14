@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Calculate password hash
+        id: hash
+        run: |
+          PASSWORD_HASH=$(echo -n "${{ secrets.ADMIN_PASSWORD }}" | openssl dgst -sha256 | awk '{print $2}')
+          echo "password_hash=$PASSWORD_HASH" >> $GITHUB_OUTPUT
+      
+      - name: Replace placeholders in admin.js
+        run: |
+          sed -i "s/__GITHUB_TOKEN__/${{ secrets.GH_TOKEN }}/g" admin.js
+          sed -i "s/__GITHUB_USERNAME__/${{ secrets.GH_USERNAME }}/g" admin.js
+          sed -i "s/__REPO_NAME__/${{ secrets.GH_REPO_NAME }}/g" admin.js
+          sed -i "s/__BRANCH__/${{ secrets.GH_BRANCH }}/g" admin.js
+          sed -i "s/__ADMIN_PASSWORD_HASH__/${{ steps.hash.outputs.password_hash }}/g" admin.js
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
