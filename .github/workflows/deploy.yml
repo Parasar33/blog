@@ -1,9 +1,8 @@
-name: Deploy to GitHub Pages
+name: Deploy site to gh-pages
 
 on:
   push:
-    branches:
-      - main  # Trigger on push to main branch
+    branches: [ main ]
   workflow_dispatch:  # Allow manual trigger
 
 permissions:
@@ -17,39 +16,25 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      
-      - name: Calculate password hash
-        id: hash
+
+      - name: Generate env.js from GitHub Secret
         run: |
-          PASSWORD_HASH=$(echo -n "${{ secrets.ADMIN_PASSWORD }}" | openssl dgst -sha256 | awk '{print $2}')
-          echo "password_hash=$PASSWORD_HASH" >> $GITHUB_OUTPUT
-      
-      - name: Replace placeholders in admin.js
-        run: |
-          sed -i "s/__GITHUB_TOKEN__/${{ secrets.GH_TOKEN }}/g" admin.js
-          sed -i "s/__GITHUB_USERNAME__/${{ secrets.GH_USERNAME }}/g" admin.js
-          sed -i "s/__REPO_NAME__/${{ secrets.GH_REPO_NAME }}/g" admin.js
-          sed -i "s/__BRANCH__/${{ secrets.GH_BRANCH }}/g" admin.js
-          sed -i "s/__ADMIN_PASSWORD_HASH__/${{ steps.hash.outputs.password_hash }}/g" admin.js
-      
+          cat > env.js <<'EOF'
+          window.__ENV = { WEB3FORMS_KEY: "${{ secrets.WEB3FORMS_KEY }}" };
+          EOF
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-      
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
