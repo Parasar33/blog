@@ -127,7 +127,7 @@ function openModal(artwork) {
             class="modal-image"
             onerror="this.src='images/placeholder.jpg'">
     `;
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
 }
 
 // Filter functions
@@ -182,6 +182,8 @@ function openCommentModalForArtwork(title, link, tags) {
 // Close comment modal
 const commentModal = document.getElementById('commentModal');
 commentModal.querySelector('.close-modal').addEventListener('click', () => commentModal.style.display = 'none');
+const commentOverlay = commentModal.querySelector('.modal-overlay');
+if (commentOverlay) commentOverlay.addEventListener('click', () => commentModal.style.display = 'none');
 window.addEventListener('click', (e) => { if (e.target === commentModal) commentModal.style.display = 'none'; });
 
 // Comment form
@@ -241,19 +243,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const welcomeModal = document.getElementById('welcomeModal');
     welcomeModal.style.display = 'block';
 
-    document.querySelector('.close-welcome').addEventListener('click', () => welcomeModal.style.display = 'none');
+    // Close welcome modal - support multiple close elements
+    document.querySelectorAll('.close-welcome').forEach(el => {
+        el.addEventListener('click', () => welcomeModal.style.display = 'none');
+    });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && welcomeModal.style.display === 'block') welcomeModal.style.display = 'none'; });
     window.addEventListener('click', e => { if (e.target === welcomeModal) welcomeModal.style.display = 'none'; });
 
-    document.querySelector('.close-modal').addEventListener('click', () => document.getElementById('postModal').style.display = 'none');
-    window.addEventListener('click', e => { if (e.target === document.getElementById('postModal')) document.getElementById('postModal').style.display = 'none'; });
+    // Post modal close
+    const postModal = document.getElementById('postModal');
+    postModal.querySelector('.close-modal').addEventListener('click', () => postModal.style.display = 'none');
+    const postOverlay = postModal.querySelector('.modal-overlay');
+    if (postOverlay) postOverlay.addEventListener('click', () => postModal.style.display = 'none');
+    window.addEventListener('click', e => { if (e.target === postModal) postModal.style.display = 'none'; });
 
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
             document.querySelector('nav a.active')?.classList.remove('active');
-            e.target.classList.add('active');
-            currentFilter = e.target.dataset.filter;
+            e.target.closest('a').classList.add('active');
+            currentFilter = e.target.closest('a').dataset.filter;
             filterArtworks();
         });
     });
