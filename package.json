@@ -1,13 +1,21 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "rishav-art-gallery",
+  "version": "2.0.0",
+  "description": "Personal art gallery with admin panel",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "node setup-local.js",
+    "dev": "node setup-local.js && echo Open admin-local.html in your browser"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  "keywords": [
+    "gallery",
+    "art",
+    "portfolio",
+    "admin-panel"
+  ],
+  "author": "Rishav Parasar",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Parasar33/blog.git"
+  }
 }
