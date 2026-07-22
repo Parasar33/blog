@@ -1,12 +1,12 @@
 [
   {
     "id": 1784738997832,
-    "title": "Ek Chama maang raha hu",
+    "title": "एक क्षमा मांग रहा हूँ",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2026-07-22",
-    "description": "Har uttar se pahle, ek prashn maang rha hu",
+    "description": "हर उत्तर से पहले, एक प्रश्न मांग रहा हूँ",
     "tags": [
       "Hindi"
     ],
@@ -29,12 +29,12 @@
   },
   {
     "id": 1781973519515,
-    "title": "Shabd",
+    "title": "शब्द",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2026-06-20",
-    "description": "Baatein hai aur kayi, par shabd nahi hai",
+    "description": "बातें हैं और कई, पर शब्द नहीं हैं",
     "tags": [
       "Hindi"
     ],
@@ -43,12 +43,12 @@
   },
   {
     "id": 1781056572433,
-    "title": "Mai Vakt Hu",
+    "title": "मैं वक्त हूँ",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2026-06-05",
-    "description": "Ruka hua vakt",
+    "description": "रुका हुआ वक्त",
     "tags": [
       "Hindi"
     ],
@@ -113,12 +113,12 @@
   },
   {
     "id": 1774176083749,
-    "title": "Yaadon Ka Dibba",
+    "title": "यादों का डिब्बा",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2026-02-19",
-    "description": "Yaadon se bhara hua khali saa ye Dibba",
+    "description": "यादों से भरा हुआ खाली सा ये डिब्बा",
     "tags": [
       "Hindi"
     ],
@@ -127,12 +127,12 @@
   },
   {
     "id": 1768382170514,
-    "title": "Mai",
+    "title": "मैं",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2026-01-09",
-    "description": "Mai kaun hu...",
+    "description": "मैं कौन हूँ...",
     "tags": [
       "Hindi"
     ],
@@ -141,7 +141,7 @@
   },
   {
     "id": 1765295959705,
-    "title": "Ye Mausam fir Dohrayenge",
+    "title": "ये मौसम फिर दोहराएंगे",
     "type": "poem",
     "medium": "",
     "dimensions": "",
@@ -170,12 +170,12 @@
   },
   {
     "id": 1762828942688,
-    "title": "Mat Pucho",
+    "title": "मत पूछो",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-11-10",
-    "description": "Nahi Bataunga...",
+    "description": "नहीं बताऊँगा...",
     "tags": [
       "Hindi"
     ],
@@ -184,12 +184,12 @@
   },
   {
     "id": 1762363618952,
-    "title": "Mandir ke 2 Kutte",
+    "title": "मंदिर के 2 कुत्ते",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-11-05",
-    "description": "Neend ki intezaar me baithe 2 kutte....",
+    "description": "नींद के इंतज़ार में बैठे 2 कुत्ते....",
     "tags": [
       "Hindi"
     ],
@@ -198,12 +198,12 @@
   },
   {
     "id": 1761235437350,
-    "title": "Shayad ek din...",
+    "title": "शायद एक दिन...",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-10-23",
-    "description": "kisi din",
+    "description": "किसी दिन",
     "tags": [
       "Hindi"
     ],
@@ -212,12 +212,12 @@
   },
   {
     "id": 1761235944405,
-    "title": "Aakhir ek Pyala Chai Mai Kitne der Peeta",
+    "title": "आखिर एक प्याला चाय मैं कितनी देर पीता",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-10-09",
-    "description": "fir chai khatam ho gayi",
+    "description": "फिर चाय खत्म हो गई",
     "tags": [
       "Hindi"
     ],
@@ -240,12 +240,12 @@
   },
   {
     "id": 1756223255638,
-    "title": "Aaj fir...",
+    "title": "आज फिर...",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-08-26",
-    "description": "har roz fir wahi...",
+    "description": "हर रोज़ फिर वही...",
     "tags": [
       "Hindi"
     ],
@@ -284,12 +284,12 @@
   },
   {
     "id": 1755249624196,
-    "title": "Bhige Kadmo ki Kahaniyan",
+    "title": "भीगे कदमों की कहानियाँ",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-08-14",
-    "description": "Bhige kadmo ke nishan...",
+    "description": "भीगे कदमों के निशान...",
     "tags": [
       "Hindi"
     ],
@@ -327,12 +327,12 @@
   },
   {
     "id": 1753637258747,
-    "title": "Wo Agar Puchti",
+    "title": "वो अगर पूछती",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-07-22",
-    "description": "Random shit - part 2",
+    "description": "रैंडम बातें - भाग 2",
     "tags": [
       "Hindi"
     ],
@@ -369,12 +369,12 @@
   },
   {
     "id": 1753635663232,
-    "title": "Baarish ki Baatein - 2",
+    "title": "बारिश की बातें - २",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-06-25",
-    "description": "Baarish/Rain - RHS",
+    "description": "बारिश - दायाँ भाग",
     "tags": [
       "Hindi",
       "Series"
@@ -399,12 +399,12 @@
   },
   {
     "id": 1750237888222,
-    "title": "shaam ke hawa me",
+    "title": "शाम की हवा में",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-06-11",
-    "description": "Thakawat bhari shaam ki neend...",
+    "description": "थकावट भरी शाम की नींद...",
     "tags": [
       "Hindi"
     ],
@@ -427,12 +427,12 @@
   },
   {
     "id": 1750402948165,
-    "title": "Baarish ki Baatein",
+    "title": "बारिश की बातें",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-05-25",
-    "description": "Baarish/Rain - LHS",
+    "description": "बारिश - बायाँ भाग",
     "tags": [
       "Hindi",
       "Series"
@@ -442,12 +442,12 @@
   },
   {
     "id": 1750403115208,
-    "title": "Chasma",
+    "title": "चश्मा",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-05-17",
-    "description": "The Diverse views from the Glasses",
+    "description": "चश्मे से दिखती अलग-अलग नज़रें",
     "tags": [
       "Hindi"
     ],
@@ -456,12 +456,12 @@
   },
   {
     "id": 1750403311030,
-    "title": "Hawa ka Jhokha",
+    "title": "हवा का झोंका",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-05-07",
-    "description": "About the leaves that fall and flow in the wind!",
+    "description": "हवा में बहते और गिरते पत्तों के बारे में",
     "tags": [
       "Hindi"
     ],
@@ -470,12 +470,12 @@
   },
   {
     "id": 1753636557494,
-    "title": "Haa Maa, Dhyan Rakhta hu tumhare Bete ka",
+    "title": "हाँ माँ, ध्यान रखता हूँ तुम्हारे बेटे का",
     "type": "poem",
     "medium": "",
     "dimensions": "",
     "creationDate": "2025-04-22",
-    "description": "Random poem",
+    "description": "रैंडम कविता",
     "tags": [
       "Hindi"
     ],
